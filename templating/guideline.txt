@@ -1,0 +1,21 @@
+**********************
+Overview
+**********************
+  - the script "template_check.pl" helps detect template' s name & dialog definition
+
+
+**********************
+Main Steps
+**********************
+- Step 1:
+  Run the script on your terminal
+- Step 2:
+  Observe the output ....
+
+
+
+**********************
+Remarks
+**********************
+
+
