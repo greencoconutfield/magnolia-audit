@@ -5,10 +5,13 @@ use Text::Trim qw(trim);
 
 getopts('vV');
 
-my $verbose = $opt_v;
+my $verbose = true;
 my $vomit = $opt_V;
+my $prefix = $opt_p;
 
-foreach my $file (@ARGV) {
+my @yaml = glob "$prefix/*.yaml";
+
+foreach my $file (@yaml) {
   print "examining $file\n" if $verbose || $vomit;
   open FILE, $file || die "Could not open $file: $!";
   my @contents = <FILE>;

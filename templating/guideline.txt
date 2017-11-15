@@ -1,18 +1,45 @@
 **********************
 Overview
 **********************
-  - the script "template_check.pl" helps detect template' s name & dialog definition
-
-
+  - "templatecheck.pl" script helps detect the name of templates and definitions and generate a report if
+    + the template definition name is different the Freemarker templates script name
+    + the template script in the YAML definition does not exist
+    + the dialog definition does not exist
+  - "ldcheck.pl" script helps detect for various Light Development best practices, including: 
+    + use of "renderType:freemarker" properties (not necessary, could use default)
+    + hardcoded values for label and description properties (should be auto generated i18N)
+    + empty label properties
+    + label and description value using i18N keys that do not correspond to auto generated i18N keys (auto generated i18N keys should be preferred)
+ - "inccheck" script helps count includes in YAML definitions 
 **********************
 Main Steps
 **********************
-- Step 1:
-  Run the script on your terminal
-- Step 2:
-  Observe the output ....
+- Step 1: Run the "templatecheck.pl" script on your terminal
 
+    templatecheck.pl [-p <template path prefix>] [-d <dialog path prefix>] [-v] <YAML template definitions...>
 
+    -p <template path prefix>   :   Path prefix used to locate the corresponding Freemarker template for the YAML template definition. 
+    -d <dialog path prefix>     :   Path prefix used to locate the corresponding dialog definition for the YAML template definition
+    -v                          :   Generate copious debugging output
+    
+    --> Collect the logs
+
+- Step 2: Run the "ldcheck.pl" script on your terminal
+
+    ldcheck.pl [-v] <YAML template definitions...>
+    -p <template or dialog path prefix>   :   Path prefix used to locate the corresponding Freemarker template or dialog for the YAML template/dialog definition.
+    -v                                    :   Generate copious debugging output
+    
+    --> Collect the logs
+
+- Step 3: Run the "inccheck.pl" script on your terminal
+
+    inccheck.pl [-t <include threshold>] [-a] [-v] [-V] <YAML file...>
+
+    -t <include threshold>  :   Sets the threshold for the number of includes that will be reported, the default is 0, meaning any inclusion will be reported (probably not what you want).
+    -a                      :   Reports all inclusions in the input files, overriding the setting of the include threshold (-t). 
+    -v                      :   Generate debugging output. 
+    -V                      :   Generate much more debugging output.
 
 **********************
 Remarks
