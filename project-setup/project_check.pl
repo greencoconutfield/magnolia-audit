@@ -10,6 +10,10 @@ my $verbose = $opt_v;
 my $vomit = $opt_V;
 my $prefix = $opt_p;
 
+print "**************************************************************************\n";
+print "This script helps detect basic Magnolia project setup such as pom.xml, naming ...\n";
+print "**************************************************************************\n";
+
 my @pom = glob "$prefix/*pom.xml";
 
 my @files = File::Find::Rule->file()

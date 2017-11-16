@@ -14,6 +14,10 @@ my $dialogpath = $opt_d;
 
 my @yaml = glob "$prefix/*.yaml";
 
+print "**************************************************************************\n";
+print "This script helps detect the name of templates & definitions\n";
+print "**************************************************************************\n";
+
 foreach my $file (@yaml) {
   print "examining $file\n" if $verbose;
   open FILE, $file || die "Could not open $file: $!";

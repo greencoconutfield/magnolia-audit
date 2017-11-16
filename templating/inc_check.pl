@@ -9,6 +9,10 @@ my $vomit = $opt_V;
 my $all = $opt_a;
 my $threshold = (defined $opt_t) ? $opt_t : 0;
 
+print "**************************************************************************\n";
+print "This script helps count includes used in a YAML file\n";
+print "**************************************************************************\n";
+
 foreach my $file (@ARGV) {
   print "examining $file\n" if $verbose || $vomit;
   open FILE, $file || die "Could not open $file: $!";

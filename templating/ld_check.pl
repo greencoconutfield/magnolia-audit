@@ -11,6 +11,10 @@ my $prefix = $opt_p;
 
 my @yaml = glob "$prefix/*.yaml";
 
+print "**************************************************************************\n";
+print "This script helps detect various light development best practises\n";
+print "**************************************************************************\n";
+
 foreach my $file (@yaml) {
   print "examining $file\n" if $verbose || $vomit;
   open FILE, $file || die "Could not open $file: $!";

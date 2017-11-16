@@ -1,16 +1,16 @@
 **********************
 Overview
 **********************
-  - "templatecheck.pl" script helps detect the name of templates and definitions and generate a report if
+  - "template_check.pl" script helps detect the name of templates and definitions and generate a report if
     + the template definition name is different the Freemarker templates script name
     + the template script in the YAML definition does not exist
     + the dialog definition does not exist
-  - "ldcheck.pl" script helps detect for various Light Development best practices, including: 
+  - "ld_check.pl" script helps detect for various Light Development best practices, including: 
     + use of "renderType:freemarker" properties (not necessary, could use default)
     + hardcoded values for label and description properties (should be auto generated i18N)
     + empty label properties
     + label and description value using i18N keys that do not correspond to auto generated i18N keys (auto generated i18N keys should be preferred)
- - "inccheck" script helps count includes in YAML definitions 
+ - "inc_check" script helps count includes in YAML definitions 
 **********************
 Main Steps
 **********************
