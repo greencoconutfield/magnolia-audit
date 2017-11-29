@@ -3,6 +3,11 @@
 use Getopt::Std;
 use File::Basename;
 use Text::Trim qw(trim);
+use POSIX qw/strftime/;
+use Time::Piece (); 
+
+$curent_time = localtime;
+
 
 getopts('vp:d:');
 
@@ -12,14 +17,21 @@ my $prefix = $opt_p;
 # path prefix for dialog definition
 my $dialogpath = $opt_d;
 
+open my $log_file, ">>", "log.txt" or die "Can't open 'log.txt'\n";
+
+
 my @yaml = glob "$prefix/*.yaml";
 
 print "**************************************************************************\n";
-print "This script helps detect the name of templates & definitions\n";
+print "This script helps detect the name of templates & definitions              \n";
 print "**************************************************************************\n";
 
+print $log_file  "**************************************************************************\n";
+print $log_file  "This script helps detect the name of templates & definitions              \n";
+print $log_file  "Run the script at $curent_time                                                      \n";                                   
+print $log_file  "**************************************************************************\n";
+
 foreach my $file (@yaml) {
-  print "examining $file\n" if $verbose;
   open FILE, $file || die "Could not open $file: $!";
   my @contents = <FILE>;
 
@@ -29,7 +41,6 @@ foreach my $file (@yaml) {
     $tscriptv = trim($');
   }
   my ($tsname, $tsdir, $tsext) = fileparse($tscriptv, qr/\.[^.]*/);
-  print "found template script: $tscriptv name: $tsname dir: $tsdir ext: $tsext\n" if $verbose;
 
   my ($dialog) = grep(/dialog:/, @contents);
   my $dialogv, $dialogp;
@@ -40,11 +51,12 @@ foreach my $file (@yaml) {
   }
 
   my ($fname, $fdir, $fext) = fileparse($file, qr/\.[^.]*/);
-  print "found file name: $fname dir: $fdir ext: $fext\n" if $verbose;
+  print $log_file " - Found template: $fname\n";
+  print $log_file "   - At: $fdir ext: $fext\n";
+  print $log_file "   - [ISSUE] Template definition name $fname ($file) does not match template script name $tsname ($tscriptv)\n" if ($fname ne $tsname);
+  print $log_file "   - [ISSUE] Template script $tscriptv does not exist in template definition $file!\n" unless -e "$prefix$tscriptv";
+  print $log_file "   - [ISSUE] Dialog $dialogp does not exist in template definition $file\n" unless -e $dialogp;
 
-  print "template definition name $fname ($file) does not match template script name $tsname ($tscriptv)\n" if ($fname ne $tsname);
-  print "checking for $prefix$tscriptv\n" if $verbose;
-  print "template script $tscriptv does not exist in template definition $file!\n" unless -e "$prefix$tscriptv";
-  print "checking for $dialogp\n" if $verbose;
-  print "dialog $dialogp does not exist in template definition $file\n" unless -e $dialogp;
 }
+
+  close $log_file;
