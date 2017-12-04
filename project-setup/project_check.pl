@@ -10,12 +10,10 @@ $curent_time = localtime;
 
 getopts('vVp:');
 
-my $verbose = $opt_v;
-my $vomit = $opt_V;
 my $prefix = $opt_p;
 
 
-open my $log_file, ">>", "log.txt" or die "Can't open 'log.txt'\n";
+open my $log_file, ">>", "../logs/log_project_check_$curent_time.txt" or die "Can't open 'log.txt'\n";
 
 
 print "*********************************************************************************\n";
@@ -39,15 +37,14 @@ else {
     print $log_file " - [OK] Successful to build the project ...\n";
 }
 
-
 my @pom = glob "$prefix/*pom.xml";
-
 my $parent_pom_path = "$prefix/pom.xml";
 
 print $log_file "====DECTECTING THE PROJECT STRUCTURE====\n";
 
 my $is_webapp = 0;
 my $is_bundle = 0;
+my $is_theme = 0;
 open FILE, $parent_pom_path || die "Could not open $parent_pom_path: $!";
 my @contents = <FILE>;
 foreach my $module (grep(/<module>/, @contents)) {
@@ -62,12 +59,20 @@ foreach my $module (grep(/<module>/, @contents)) {
     print $log_file  " - [OK] Project  contains a bundle: $modulev \n";
     $is_bundle = 1;
   } 
+  if (index($modulev, "theme") != -1) {
+    print $log_file  " - [WARNING] Project  contains a maven theme module: $modulev \n";
+    $is_theme = 1;
+  } 
 }
 if ($is_webapp != 1) {
     print $log_file  " - [FALIED] Project does not contain a standard webapp --> Please visit ....\n";
 } 
 if ($is_bundle !=1) {
     print $log_file  " - [FAILED] Project does not contain a standard bundle --> Please visit ....\n";
+} 
+
+if ($is_bundle ==1) {
+    print $log_file  " - [WARNING] Please consider to move the module $modulev to light development approach \n";
 } 
 
 print $log_file  "====DECTECTING THE PROJECT POM.XML FILES====\n";
@@ -93,14 +98,12 @@ foreach my $file (@files) {
     if ($version =~ /<version>/) {
       $versionv = trim($');
       $versionv = substr $versionv, 0, -10;
-      
     }
 
     if ($versionv =~ /[0-9\.]+\.[0-9]+/) {
       print $log_file   "     - [FALIED] Found label value $versionv that you are hardcoding  $versionv \n";
     }
     else{
-     
       print $log_file   "     - [OK] Found label value $versionv \n" ;
     }
   }

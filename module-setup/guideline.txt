@@ -1,17 +1,53 @@
 **********************
 Overview
 **********************
-
-
-
-
+  - "module_check.pl" script helps detect basic setup of a module:
+    + It calls "workspace_check.pl" script.
+    + It calls "hybrid_check.pl" script.
+    + It calls "version_handler_check.pl" script.
+  - "workspace_check.pl" script helps detect potential issues related to workspace.
+    + To show you how many workspaces you defined for your module.
+  - "hybrid_check.pl" script helps detect potential issues related to maven-hybrid module setup.
+    + To see whether you should move your resources to a separate light module.
+  - "version_handler_check.pl" script helps detect potential issues related to defining a ModuleVersionHandler.
+    + To see whether you have defined a correct versionhandler for you module.
 **********************
 Main Steps
 **********************
+- Step 1: Run the "module_check.pl" script on your terminal
 
+    module_check.pl [-p <path to your parent project] -m <your_module> 
 
+    -p <project path prefix>   :   Path prefix where your parent project (Magnolia project) is located.
+    - m <your_module>          :   Name of your module.
+    
+    --> Collect the logs under /logs/log_project_check_.....txt
 
+- Step 2.1: Run "workspace_check.pl" script on your terminal
+    workspace_check..pl [-p <path to your parent project] -m <your_module> 
+
+    -p <project path prefix>   :   Path prefix where your parent project (Magnolia project) is located.
+    - m <your_module>          :   Name of your module.
+    
+    --> Collect the logs under /logs/log_project_check_.....txt
+
+- Step 2.2: Run "hybrid_check.pl" script on your terminal
+    hybrid_check.pl [-p <path to your parent project] -m <your_module> 
+
+    -p <project path prefix>   :   Path prefix where your parent project (Magnolia project) is located.
+    - m <your_module>          :   Name of your module.
+    
+    --> Collect the logs under /logs/log_project_check_.....txt
+
+- Step 2.3: Run "version_handler_check.pl" on your terminal
+    version_handler_check.pl [-p <path to your parent project] -m <your_module> 
+
+    -p <project path prefix>   :   Path prefix where your parent project (Magnolia project) is located.
+    - m <your_module>          :   Name of your module.
+    
+    --> Collect the logs under /logs/log_project_check_.....txt
 
 **********************
 Remarks
 **********************
+- The output of "module_check" will distributed into 3 files (as the results of 3 individual scripts)

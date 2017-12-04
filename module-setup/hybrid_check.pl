@@ -15,7 +15,7 @@ my $vomit   = $opt_V;
 my $prefix  = $opt_p;
 my $module  = $opt_m;
 
-open my $log_file, ">>", "log.txt" or die "Can't open 'log.txt'\n";
+open my $log_file, ">>", "../logs/log_hybrid_check$curent_time.txt" or die "Can't open 'log.txt'\n";
 
 print "**************************************************************************\n";
 print "This script helps detect whether a module is a hybrid                     \n";

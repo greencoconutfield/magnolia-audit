@@ -1,0 +1,14 @@
+target
+overlays
+logs/*.*
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+.project
+.classpath
+.settings
+/.DS_Store
+/light-modules
+light-modules

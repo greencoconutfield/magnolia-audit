@@ -1,16 +1,22 @@
 **********************
 Overview
 **********************
-
-
-
-
+  - "project_check.pl" script helps detect the following items related to project setup:
+    + Check for maven dependencies
+    + Check for the project structure - existence of standard webapp
+    + Check for the project structure - existence of standard bundle
+    + Check for the project structure - existence of a maven theme module (should move to light module)
+    + Check for hardcoding of versions used inside all POM.XML files
 **********************
 Main Steps
 **********************
+- Step 1: Run the "project_check.pl" script on your terminal
 
+    project_check.pl [-p <path to your parent project]
 
+    -p <template path prefix>   :   Path prefix where your parent project (Magnolia project) is located.
 
+    --> Collect the logs under /logs/log_project_check_.....txt
 
 **********************
 Remarks

@@ -15,7 +15,7 @@ my $vomit = $opt_V;
 my $prefix = $opt_p;
 my $module = $opt_m;
 
-open my $log_file, ">>", "log.txt" or die "Can't open 'log.txt'\n";
+open my $log_file, ">>", "../logs/log_version_handler_check_$curent_time.txt" or die "Can't open 'log.txt'\n";
 
 print "**************************************************************************\n";
 print "This script helps detect whether a module is using version handler        \n";
