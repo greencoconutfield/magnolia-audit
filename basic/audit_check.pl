@@ -7,7 +7,6 @@ print "The tool will help you detect and validate your Magnolia projects        
 print "**************************************************************************\n";
 
 my $is_exit = 0;
-
 while($is_exit == 0){
     print "[1] Check for project setup.       \n";
     print "[2] Check for module setup.        \n";
@@ -61,9 +60,7 @@ sub project_check {
         }
     }   
     print "Checking your project ..........! \n";
-
     $t = `perl ../project-setup/project_check.pl -p $project_path`;
-
     print "Please get the result at ../logs/...! \n";
 
 }
@@ -97,9 +94,7 @@ sub module_check {
     }   
 
     print "Checking your module ..........! \n";
-
     $t = `perl ../module-setup/module_check.pl -p $project_path -m $module_name`;
-
     print "Please get the result at ../logs/...! \n";
 }
 
